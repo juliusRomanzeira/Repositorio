@@ -19,18 +19,10 @@ function App() {
     return novosErros;
   };
 
-  const handleAdicionarUsuario = (e) => {
-    e.preventDefault();
-    const errosValidacao = validarFormulario();
-    if (Object.keys(errosValidacao).length > 0) {
-      setErros(errosValidacao);
-      return;
+
+  const handleLogin = (e) => {
+    console.log("login feito ", formData);
     }
-    setErros({});
-    console.log('Novo usuário:', formData);
-    alert('Usuário adicionado com sucesso! Verifique o console.');
-    setFormData({ login: '', senha: '' });
-  };
 
   const abrirWhatsApp = () => {
     const numero = '+5581982727878';
@@ -41,7 +33,16 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f3f4f6' }}>
-      
+      <h1 style={{ position: 'absolute', top: '23%', right: '40%', fontSize: '1.5rem', fontWeight: 'bold', color: '#374151' }}>
+      <button
+              onClick={abrirWhatsApp}
+              style={{ width: '100%', backgroundColor: '#22c55e', color: 'white', padding: '0.5rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
+              onMouseOver={(e) => (e.target.style.backgroundColor = '#16a34a')}
+              onMouseOut={(e) => (e.target.style.backgroundColor = '#22c55e')}
+            >
+              Suporte
+            </button>
+      </h1>
       <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', maxWidth: '20rem', width: '100%' }}>
         <img
           src="Arco.png"
@@ -79,21 +80,22 @@ function App() {
             {erros.senha && <p style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.25rem' }}>{erros.senha}</p>}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button
-              onClick={handleAdicionarUsuario}
-              style={{ width: '100%', backgroundColor: '#3b82f6', color: 'white', padding: '0.5rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
-              onMouseOver={(e) => (e.target.style.backgroundColor = '#2563eb')}
+            
+            <button style={{ backgroundColor: '#3b82f6', color: 'white', padding: '0.5rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
+              onClick={handleLogin}
+              onMouseOver={(e)=> (e.target.style.backgroundColor = '#2563eb')}
               onMouseOut={(e) => (e.target.style.backgroundColor = '#3b82f6')}
+              >
+              Login
+
+            </button>
+
+            <button style={{ backgroundColor: '#d1d5db', color: 'black', padding: '0.5rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
+              onClick={() => alert('Adicionar Usuário funcionalidade ainda não implementada')}
+              onMouseOver={(e) => (e.target.style.backgroundColor = '#bfc3ca')}
+              onMouseOut={(e) => (e.target.style.backgroundColor = '#d1d5db')}
             >
               Adicionar Usuário
-            </button>
-            <button
-              onClick={abrirWhatsApp}
-              style={{ width: '100%', backgroundColor: '#22c55e', color: 'white', padding: '0.5rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
-              onMouseOver={(e) => (e.target.style.backgroundColor = '#16a34a')}
-              onMouseOut={(e) => (e.target.style.backgroundColor = '#22c55e')}
-            >
-              Conversar no WhatsApp
             </button>
           </div>
         </div>
