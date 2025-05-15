@@ -10,6 +10,11 @@ function CadastroFuncionario() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (senha.length <= 6) {
+      alert('A senha deve ter mais de 6 dígitos!');
+      return;
+    }
+
     if (senha !== confirmarSenha) {
       alert('As senhas não coincidem!');
       return;
