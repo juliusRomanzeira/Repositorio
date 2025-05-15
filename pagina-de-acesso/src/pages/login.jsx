@@ -18,6 +18,10 @@ function Login() {
     return novosErros;
   };
 
+  const handleCadastro = () => {
+    navigate('/cadastro');
+  }
+
   const handleLogin = (e) => {
     e.preventDefault();
     const errosValidacao = validarFormulario();
@@ -93,7 +97,7 @@ function Login() {
               Login
             </button>
             <button style={{ backgroundColor: '#d1d5db', color: 'black', padding: '0.5rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
-              onClick={() => alert('Adicionar Usuário funcionalidade ainda não implementada')}
+              onClick={handleCadastro}
               onMouseOver={(e) => (e.target.style.backgroundColor = '#bfc3ca')}
               onMouseOut={(e) => (e.target.style.backgroundColor = '#d1d5db')}
             >
