@@ -19,9 +19,36 @@ function CadastroFuncionario() {
       alert('As senhas não coincidem!');
       return;
     }
+    {
+      // Verifica se o nome contém apenas letras e espaços
+      const nomeValido = /^[A-Za-zÀ-ÿ\s]+$/.test(nome.trim());
+      if (!nomeValido) {
+        alert('O nome não pode conter caracteres especiais ou números!');
+        return;
+      }
+      // Verifica se há mais de um espaço entre as palavras
+      if (/\s{2,}/.test(nome)) {
+        alert('O nome não pode conter mais de um espaço entre as palavras!');
+        return;
+      }
 
-    console.log('Cadastro enviado:', { nome, senha, idContrato });
-    alert('Cadastro realizado com sucesso!');
+      // Formata o nome: cada palavra começa com maiúscula, o resto minúsculo
+      const nomeFormatado = nome
+        .trim()
+        .split(/\s+/)
+        .map(
+          (palavra) =>
+            palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
+        )
+        .join(' ');
+
+      if (idContrato !== '' && senha === confirmarSenha && senha.length >= 6 && nomeValido) {
+        setSenha(senha);
+        console.log('Cadastro enviado:', { nome: nomeFormatado, senha, idContrato });
+        alert(`Cadastro realizado com sucesso! Bem-vindo, ${nome}`);
+      }
+    }
+
   };
 
   return (
