@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import './CadastroFuncionario.css'; // Importa o CSS
+import api from '../services/api'; // Importa o arquivo api.js
 
 function CadastroFuncionario() {
   const [nome, setNome] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [idContrato, setIdContrato] = useState('');
+  const [priority, setPriority] = useState(false);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-
+    
     if (senha.length < 6) {
       alert('A senha deve ter mais de 6 dígitos!');
       return;
@@ -44,11 +46,16 @@ function CadastroFuncionario() {
 
       if (idContrato !== '' && senha === confirmarSenha && senha.length >= 6 && nomeValido) {
         setSenha(senha);
+        const response = await api.post('/cadastro', {
+          nome: nomeFormatado,
+          senha: senha,
+          idContrato: idContrato,
+          priority: priority
+        });
         console.log('Cadastro enviado:', { nome: nomeFormatado, senha, idContrato });
-        alert(`Cadastro realizado com sucesso! Bem-vindo, ${nome}`);
+        alert(`Cadastro realizado com sucesso! Bem-vindo`);
       }
     }
-
   };
 
   return (
@@ -63,9 +70,15 @@ function CadastroFuncionario() {
               return;
             }
             handleSubmit(e);
+            // Limpa os campos após o cadastro
+            setNome('');
+            setSenha('');
+            setConfirmarSenha('');
+            setIdContrato('');
+            setPriority(false);
           }}
         >
-          <label htmlFor="nome">Nome:</label>
+          <label htmlFor="nome">Nome Completo:</label>
           <input
             type="text"
             id="nome"
@@ -93,17 +106,20 @@ function CadastroFuncionario() {
           />
 
           <label htmlFor="idContrato">Função na Empresa:</label>
-          <div className="contrato-buttons" style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+          <div className="contrato-buttons" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10px' }}>
             <button
               type="button"
               style={{
                 backgroundColor: idContrato === '1' ? '#333333' : 'grey',
                 color: 'white',
-                width: '25%',
+                width: '33%',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s'
               }}
-              onClick={() => setIdContrato(idContrato === '1' ? '' : '1')}
+              onClick={() => {
+                setIdContrato(idContrato === '1' ? '' : '1');
+                setPriority(priority === true ? false : true);
+              }}
             >
               Presidência
             </button>
@@ -112,7 +128,7 @@ function CadastroFuncionario() {
               style={{
                 backgroundColor: idContrato === '2' ? '#333333' : 'grey',
                 color: 'white',
-                width: '25%',
+                width: '33%',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s'
               }}
@@ -125,7 +141,7 @@ function CadastroFuncionario() {
               style={{
                 backgroundColor: idContrato === '3' ? '#333333' : 'grey',
                 color: 'white',
-                width: '25%',
+                width: '33%',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s'
               }}
@@ -133,21 +149,36 @@ function CadastroFuncionario() {
             >
               Operador
             </button>
+          </div>
+          <label htmlFor="idContrato">Apresenta deficiência ?</label>
+          <div className="contrato-buttons" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10px' }}>
             <button
               type="button"
               style={{
                 backgroundColor: idContrato === '4' ? '#333333' : 'grey',
                 color: 'white',
-                width: '25%',
+                width: '50%',
                 cursor: 'pointer',
                 transition: 'background-color 0.2s'
               }}
               onClick={() => setIdContrato(idContrato === '4' ? '' : '4')}
             >
-              PCD
+              Sim
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '5' ? '#333333' : 'grey',
+                color: 'white',
+                width: '50%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '3' ? '' : '3')}
+            >
+              Não
             </button>
           </div>
-
           <button type="submit">Cadastrar</button>
         </form>
       </div>

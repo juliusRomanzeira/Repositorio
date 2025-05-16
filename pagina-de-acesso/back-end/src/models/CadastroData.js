@@ -4,7 +4,8 @@ const CadastroDataSchema = new mongoose.Schema({
 
     nome: String,
     senha: String,
-    id: String,
+    idContrato: String,
+    priority: Boolean
 });
 
 module.exports = mongoose.model('CadastroData', CadastroDataSchema);

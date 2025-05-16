@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/api'; // Importa o arquivo api.js
 
 function Home() {
+
 const navigate = useNavigate();
-  const [formData, setFormData] = useState({ login: '', senha: '' });
+  const [formData, setFormData] = useState({ nome: '', senha: '' });
   const [erros, setErros] = useState({});
 
   const handleChange = (e) => {
@@ -13,7 +15,7 @@ const navigate = useNavigate();
 
   const validarFormulario = () => {
     const novosErros = {};
-    if (!formData.login.trim()) novosErros.login = 'Login é obrigatório';
+    if (!formData.nome.trim()) novosErros.login = 'Login é obrigatório';
     if (formData.senha.length < 6) novosErros.senha = 'Senha deve ter pelo menos 6 caracteres';
     return novosErros;
   };

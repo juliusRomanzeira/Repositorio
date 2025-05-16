@@ -2,27 +2,27 @@ const Cadastro = require('../models/CadastroData');
 
 module.exports = {
 
-    async read(request, response) {
-        const cadastroList = await Cadastro.find();
-        
-        return response.json(cadastroList);
-
-    },
-
-
-
     async create(request, response) {
-        const{ nome, senha, id } = request.body;
+        const{ nome, senha, idContrato, priority } = request.body;
 
-        if (!nome || !senha || !id) {
+        if (!nome || !senha || !idContrato) {
             return response.status(400).json({ error: 'Preencha todos os campos' });
         }
 
         const cadastroCreated = await Cadastro.create({
             nome,
             senha,
-            id
+            idContrato,
+            priority
         });
+    },
+
+
+    async read(request, response) {
+        const cadastroList = await Cadastro.find();
+        
+        return response.json(cadastroList);
+
     },
 
     async delete(request, response) {
