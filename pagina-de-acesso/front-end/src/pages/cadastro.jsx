@@ -10,7 +10,7 @@ function CadastroFuncionario() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (senha.length <= 6) {
+    if (senha.length < 6) {
       alert('A senha deve ter mais de 6 dígitos!');
       return;
     }
@@ -19,16 +19,52 @@ function CadastroFuncionario() {
       alert('As senhas não coincidem!');
       return;
     }
+    {
+      // Verifica se o nome contém apenas letras e espaços
+      const nomeValido = /^[A-Za-zÀ-ÿ\s]+$/.test(nome.trim());
+      if (!nomeValido) {
+        alert('O nome não pode conter caracteres especiais ou números!');
+        return;
+      }
+      // Verifica se há mais de um espaço entre as palavras
+      if (/\s{2,}/.test(nome)) {
+        alert('O nome não pode conter mais de um espaço entre as palavras!');
+        return;
+      }
 
-    console.log('Cadastro enviado:', { nome, senha, idContrato });
-    alert('Cadastro realizado com sucesso!');
+      // Formata o nome: cada palavra começa com maiúscula, o resto minúsculo
+      const nomeFormatado = nome
+        .trim()
+        .split(/\s+/)
+        .map(
+          (palavra) =>
+            palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
+        )
+        .join(' ');
+
+      if (idContrato !== '' && senha === confirmarSenha && senha.length >= 6 && nomeValido) {
+        setSenha(senha);
+        console.log('Cadastro enviado:', { nome: nomeFormatado, senha, idContrato });
+        alert(`Cadastro realizado com sucesso! Bem-vindo, ${nome}`);
+      }
+    }
+
   };
 
   return (
     <div className="cadastro-container">
       <div className="cadastro-card">
         <h2>Cadastro de Funcionário</h2>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!idContrato) {
+              alert('Selecione uma função na empresa!');
+              return;
+            }
+            handleSubmit(e);
+          }}
+        >
           <label htmlFor="nome">Nome:</label>
           <input
             type="text"
@@ -56,14 +92,61 @@ function CadastroFuncionario() {
             required
           />
 
-          <label htmlFor="idContrato">ID do Contrato:</label>
-          <input
-            type="text"
-            id="idContrato"
-            value={idContrato}
-            onChange={(e) => setIdContrato(e.target.value)}
-            required
-          />
+          <label htmlFor="idContrato">Função na Empresa:</label>
+          <div className="contrato-buttons" style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '1' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '1' ? '' : '1')}
+            >
+              Presidência
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '2' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '2' ? '' : '2')}
+            >
+              Gerência
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '3' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '3' ? '' : '3')}
+            >
+              Operador
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '4' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '4' ? '' : '4')}
+            >
+              PCD
+            </button>
+          </div>
 
           <button type="submit">Cadastrar</button>
         </form>
