@@ -10,7 +10,7 @@ function CadastroFuncionario() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (senha.length <= 6) {
+    if (senha.length < 6) {
       alert('A senha deve ter mais de 6 dígitos!');
       return;
     }
@@ -28,7 +28,16 @@ function CadastroFuncionario() {
     <div className="cadastro-container">
       <div className="cadastro-card">
         <h2>Cadastro de Funcionário</h2>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!idContrato) {
+              alert('Selecione uma função na empresa!');
+              return;
+            }
+            handleSubmit(e);
+          }}
+        >
           <label htmlFor="nome">Nome:</label>
           <input
             type="text"
@@ -56,14 +65,61 @@ function CadastroFuncionario() {
             required
           />
 
-          <label htmlFor="idContrato">ID do Contrato:</label>
-          <input
-            type="text"
-            id="idContrato"
-            value={idContrato}
-            onChange={(e) => setIdContrato(e.target.value)}
-            required
-          />
+          <label htmlFor="idContrato">Função na Empresa:</label>
+          <div className="contrato-buttons" style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '1' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '1' ? '' : '1')}
+            >
+              Presidência
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '2' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '2' ? '' : '2')}
+            >
+              Gerência
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '3' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '3' ? '' : '3')}
+            >
+              Operador
+            </button>
+            <button
+              type="button"
+              style={{
+                backgroundColor: idContrato === '4' ? '#333333' : 'grey',
+                color: 'white',
+                width: '25%',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onClick={() => setIdContrato(idContrato === '4' ? '' : '4')}
+            >
+              PCD
+            </button>
+          </div>
 
           <button type="submit">Cadastrar</button>
         </form>
