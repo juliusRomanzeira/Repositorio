@@ -9,3 +9,7 @@ publish = "dist"
 from = "/*"
 to = "/index.html"
 status = 200
+from = "/api/*"
+to = "http://localhost:3000/:splat"
+status = 200
+force = true
