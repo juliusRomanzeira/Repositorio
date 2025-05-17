@@ -69,7 +69,7 @@ function Home() {
           </button>
         </div>
         <img
-          src="Arco-KFqEPhXF.png"
+          src="Arco.png"
           alt="Logo"
           style={{ display: 'block', margin: '0 auto 1.5rem', width: '100px', height: '100px' }}
         />
