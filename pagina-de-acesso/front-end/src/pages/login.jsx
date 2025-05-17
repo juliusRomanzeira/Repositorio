@@ -121,6 +121,15 @@ function Home() {
             </button>
           </div>
         </div>
+      <div style={{
+        position: 'absolute',
+        bottom: '1rem',
+        right: '1rem',
+        fontSize: '0.75rem',
+        color: '#6b7280'
+      }}>
+        Powered by NeuroFlux
+      </div>
       </div>
     </div>
   );
