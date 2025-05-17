@@ -2,11 +2,12 @@
   NODE_VERSION = "18"
 
 [build]
-  base = "."
+  base = "front-end"
   command = "npm run build"
-  publish = "dist"
+  publish = "front-end/dist"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
