@@ -1,14 +1,11 @@
 [build.environment]
-  NODE_VERSION = "18"
+NODE_VERSION = "18"
 
 [build]
-  base = "pagina-de-acesso/front-end"
-  command = "npm run build"
-  publish = "pagina-de-acesso/front-end/dist"
+command = "npm run build"
+publish = "dist"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-
+from = "/*"
+to = "/index.html"
+status = 200
