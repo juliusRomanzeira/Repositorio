@@ -48,9 +48,9 @@ function Home() {
   };
 
   const abrirWhatsApp = () => {
-    const numero = '+5581982727878';
-    const mensagem = 'Acabei de ter um problema com o sistema, se trata de...';
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    // const numero = '+5581982727878';
+    // const mensagem = 'Acabei de ter um problema com o sistema, se trata de...';
+    const url = `https://www.instagram.com/wattconsultoria?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==`;
     window.open(url, '_blank');
   };
 
